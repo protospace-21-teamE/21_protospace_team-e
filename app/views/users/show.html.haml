@@ -1,0 +1,23 @@
+.container.user-page
+  %header.user-nav
+    .media
+      .media-left
+        = image_tag(@user.avatar.thumb, alt: "profile_photo", class: "media-object", style: "width: 64px; height: 64px;")
+      .media-body
+        %h4#top-aligned-media.media-heading
+          = @user.name
+          %span.label.label-default.project-number
+            29
+            %i Projects
+        .proto-user
+          %span.degree= @user.position
+        .row
+          .col-md-6
+            %h4 Profile
+            %p= @user.profile
+          .col-md-6
+            %h4 Occupation
+            %p= @user.occupation
+.container.proto-list
+  .row
+    = render partial: 'prototypes/prototype', collection: @prototypes
