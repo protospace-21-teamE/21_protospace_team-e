@@ -1,0 +1,36 @@
+.container.proto-new
+  = form_for @prototype do |f|
+    = f.hidden_field :user_id, value: current_user.id
+    .col-md-8.col-md-offset-2
+      %header.row.user-nav.row
+        .col-md-12
+          %h4 Title
+          .proto-new-title
+            = f.text_field :title, required: true, autofocus: true, placeholder: "Input Title"
+      .row
+        .col-md-12
+          %h4 Main Thumbnail
+          .cover-image-upload#main_image_uploader
+            = f.fields_for :captured_images do |image|
+              %img
+              = image.file_field :content, required: true
+              = image.hidden_field :status, value: "main"
+        .col-md-12
+          %h4 Sub Thumbnails
+          %ul.proto-sub-list.list-group
+            - 3.times do |i|
+              %li.list-group-item.col-md-4
+                .image-upload
+                  = f.fields_for :captured_images do |image|
+                    %img
+                    = image.file_field :content
+                    = image.hidden_field :status, value: "sub"
+      .row.proto-description
+        .col-md-12
+          %h4 Catch Copy
+          = f.text_field :catch_copy, require: true, placeholder: "Input Catch Copy"
+        .col-md-12
+          %h4 Concept
+          = f.text_area :concept, require: true, placeholder: "Input Concept"
+      .row.text-center.proto-btn
+        = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"
