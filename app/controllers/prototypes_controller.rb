@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: :show
+  before_action :set_prototype, only: [:show, :edit, :update, :destroy]
 
   def index
     @prototypes = Prototype.page(params[:page]).per(16)
@@ -23,19 +23,16 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    @prototype = Prototype.find(params[:id])
     @main = @prototype.captured_images[0]
     @sub = @prototype.captured_images.where(status: 1)
   end
 
   def update
-    prototype = Prototype.find(params[:id])
-    prototype.update(prototype_params)
+    @prototype.update(prototype_params)
     redirect_to action: :show, notice: 'Edited prototype was successfully saved'
   end
 
   def destroy
-    @prototype = Prototype.find(params[:id])
     if @prototype.user_id == current_user.id
       @prototype.destroy
     end
