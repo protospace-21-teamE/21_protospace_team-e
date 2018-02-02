@@ -13,8 +13,10 @@
             = link_to "#{@prototype.user.name}", user_path(@prototype.user)
             .degree
               = @prototype.user.position
-          %ul.nav.nav-pills.col-lg-11
-            = link_to "DELETE", "/prototypes/#{@prototype.id}", method: :delete, class: "btn btn-default col-lg-1"
+        %ul.nav.nav-pills.col-lg-11
+          = link_to "EDIT", edit_prototype_path, class: "btn btn-default col-lg-1"
+        %ul.nav.nav-pills.col-lg-11
+          = link_to "DELETE", "/prototypes/#{@prototype.id}", method: :delete, class: "btn btn-default col-lg-1"
   .row
     .col-md-9.image-box
       = image_tag(@prototype.set_main_thumbnail.large, class: 'img-responsive img-size-fix', style: "margin: 0 auto;")

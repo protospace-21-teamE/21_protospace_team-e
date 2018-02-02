@@ -22,6 +22,17 @@ class PrototypesController < ApplicationController
   def show
   end
 
+  def edit
+    @prototype = Prototype.find(params[:id])
+    @main = @prototype.captured_images[0]
+    @sub = @prototype.captured_images.where(status: 1)
+  end
+
+  def update
+    prototype = Prototype.find(params[:id])
+    prototype.update(prototype_params)
+    redirect_to action: :show, notice: 'Edited prototype was successfully saved'
+
   def destroy
     @prototype = Prototype.find(params[:id])
     if @prototype.user_id == current_user.id
@@ -41,7 +52,7 @@ class PrototypesController < ApplicationController
       :catch_copy,
       :concept,
       :user_id,
-      captured_images_attributes: [:content, :status]
+      captured_images_attributes: [:id, :content, :status]
     )
   end
 end
