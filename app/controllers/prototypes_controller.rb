@@ -32,6 +32,12 @@ class PrototypesController < ApplicationController
     prototype = Prototype.find(params[:id])
     prototype.update(prototype_params)
     redirect_to action: :show, notice: 'Edited prototype was successfully saved'
+
+  def destroy
+    @prototype = Prototype.find(params[:id])
+    if @prototype.user_id == current_user.id
+      @prototype.destroy
+    end
   end
 
   private
