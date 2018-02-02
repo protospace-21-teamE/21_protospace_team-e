@@ -32,6 +32,7 @@ class PrototypesController < ApplicationController
     prototype = Prototype.find(params[:id])
     prototype.update(prototype_params)
     redirect_to action: :show, notice: 'Edited prototype was successfully saved'
+  end
 
   def destroy
     @prototype = Prototype.find(params[:id])
