@@ -12,8 +12,8 @@
           %h4 Main Thumbnail
           .cover-image-upload#main_image_uploader
             = f.fields_for :captured_images, @main do |image|
-              = image_tag "#{@main.content}"
-              = image.file_field :content, required: true
+              = image_tag @main.content
+              = image.file_field :content
               = image.hidden_field :status, value: "main"
         .col-md-12
           %h4 Sub Thumbnails
@@ -23,11 +23,11 @@
                 .image-upload
                   - if @sub[i].present?
                     = f.fields_for :captured_images, @sub[i] do |image|
-                      = image_tag "#{@sub[i].content}"
+                      = image_tag @sub[i].content
                       = image.file_field :content
                       = image.hidden_field :status, value: "sub"
                   - else
-                    = f.fields_for :captured_images do |image|
+                    = f.fields_for :captured_images, @add do |image|
                       = image_tag ""
                       = image.file_field :content
                       = image.hidden_field :status, value: "sub"

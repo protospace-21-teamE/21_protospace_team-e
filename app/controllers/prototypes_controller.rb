@@ -25,11 +25,13 @@ class PrototypesController < ApplicationController
   def edit
     @main = @prototype.captured_images[0]
     @sub = @prototype.captured_images.where(status: 1)
+    @add = @prototype.captured_images.build
   end
 
   def update
     @prototype.update(prototype_params)
-    redirect_to action: :show, notice: 'Edited prototype was successfully saved'
+    flash[:notice] = 'Edited prototype was successfully saved'
+    redirect_to action: :show
   end
 
   def destroy
