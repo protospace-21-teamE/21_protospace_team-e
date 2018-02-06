@@ -5,6 +5,7 @@ $(function(){
     reader = new FileReader();
     //読み込んだファイルの取得
     file = e.target.files[0];
+
     //ファイル読み込み終了時に発火
     reader.onload = (function(file) {
       return function(e){
@@ -14,6 +15,8 @@ $(function(){
         });
       };
     })(file);
+
+    //ファイル読み込みの実行
     reader.readAsDataURL(file);
   });
 });
