@@ -22,6 +22,7 @@ class PrototypesController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @prototype.comments.includes(:user)
+    @like = @prototype.likes.where(user_id: current_user.id).first
   end
 
   def edit
