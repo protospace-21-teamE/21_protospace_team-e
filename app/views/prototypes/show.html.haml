@@ -57,3 +57,19 @@
           %a{href: "#", class: "btn btn-default"} iPad
         %li
           %a{href: "#", class: "btn btn-default"} wireframe
+  .comments
+    %h4 Comments
+    -if @comments
+      - @comments.each do |comment|
+        %p
+          %strong
+            = comment.comment
+        -if user_signed_in? && current_user.id == comment.user_id
+          = link_to "Edit", prototype_comment_path(@prototype, comment), method: :get, id: "edit_comment"
+          = link_to "Delete", prototype_comment_path(@prototype, comment), method: :delete, id: "destroy_comment"
+
+  .comment-form
+    -if current_user
+      = form_for([@prototype, @comment], id: "new_comment") do |f|
+        = f.text_field :comment, name: "comment", placeholder: "コメントする", class: "textbox"
+        = f.submit "SEND"

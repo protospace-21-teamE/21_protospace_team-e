@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, UserImageUploader
 
   has_many :prototypes
+  has_many :comments
   has_many :prototypes, through: :likes
   has_many :likes
 
