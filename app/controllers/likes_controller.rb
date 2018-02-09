@@ -6,4 +6,9 @@ class LikesController < ApplicationController
   def destroy
   end
 
+  private
+
+  def like_params
+  end
+
 end
