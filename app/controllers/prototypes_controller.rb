@@ -20,6 +20,7 @@ class PrototypesController < ApplicationController
   end
 
   def show
+    @like = @prototype.likes.where(user_id: current_user.id).first
   end
 
   def edit
