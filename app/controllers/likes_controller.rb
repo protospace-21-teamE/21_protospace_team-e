@@ -3,8 +3,11 @@ class LikesController < ApplicationController
   def create
     Like.create(like_params)
     flash[:notice] = 'Liked this prototype'
-    redirect_to prototype_path(id: params[:prototype_id])
-    # render controller: :prototype, action: :show
+    # binding.pry
+    respond_to do |format|
+      format.html {redirect_to prototype_path(id: params[:prototype_id])}
+      format.json
+    end
   end
 
   def destroy
