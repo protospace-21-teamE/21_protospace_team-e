@@ -3,12 +3,10 @@ $(function(){
     var html =
     '<p>' +
       '<strong>' +
-        '<a href="">' +
         comment.user_name +
-        '</a>' +
         ' : ' +
       '</strong>' +
-      comment.user_name +
+      comment.comment +
     '</p>'
     return html;
   }
@@ -34,3 +32,4 @@ $(function(){
     })
   })
 });
+
