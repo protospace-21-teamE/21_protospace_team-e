@@ -2,7 +2,7 @@ class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:show, :edit, :update, :destroy]
 
   def index
-    @prototypes = Prototype.page(params[:page]).per(16)
+    @prototypes = Prototype.page(params[:page]).per(4)
   end
 
   def new
