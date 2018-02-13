@@ -77,7 +77,7 @@
             = comment.user.name + " : "
           = comment.comment
         -if user_signed_in? && current_user.id == comment.user_id
-          = link_to "Edit", prototype_comment_path(@prototype, comment), method: :get, id: "edit_comment"
+          = link_to "Edit", edit_prototype_comment_path(@prototype, comment), method: :get, id: "edit_comment"
           = link_to "Delete", prototype_comment_path(@prototype, comment), method: :delete, id: "destroy_comment"
 
   .comment-form

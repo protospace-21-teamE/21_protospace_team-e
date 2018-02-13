@@ -18,7 +18,11 @@ class CommentsController < ApplicationController
   end
 
   def update
+
+    @comment = Comment.find(params[:id])
+    @comment.update(comment_params)
     flash[:notice] = "Edit your comment completed"
+    redirect_to prototype_path(params[:prototype_id])
   end
 
   def destroy
