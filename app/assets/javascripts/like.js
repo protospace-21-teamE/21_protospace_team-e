@@ -6,16 +6,26 @@ $(function(){
     event.stopPropagation();
 
     //url,target, id, csrfトークンの取得
-    var url = location.href + "/likes"
     var icon_svg = $(this)
     var user_id = $('.current_user_id').val();
     var prototype_id = $('.prototype_id').val();
     var csrf_token = $('meta[name=csrf-token]').attr('content');
+    var like_id = $("#like_id").val();
+    console.log(like_id);
+
+    //flag(0:like, 1:unlike)によって分岐
+    if( $("#like_flag").val() == 0 ){
+      var url = location.href + "/likes"
+      var type = "POST"
+    } else {
+      var url = location.href + "/likes/" + like_id
+      var type = "DELETE"
+    }
 
     //ajax通信を行う
     $.ajax({
       url: url,
-      type: "POST",
+      type: type,
       headers: {"X-CSRF-Token": csrf_token},
       dataType: 'json',
       processData: false,
@@ -24,46 +34,30 @@ $(function(){
 
     //通信後処理
     .done(function(data){
-      //ハートを赤に変える
-      icon = icon_svg.find("path")
-      icon.attr("fill", "red")
 
-      //カウントを1つ増やす
-      var likes_count = Number($("#likes_count").text())+1
-      $("#likes_count").text(likes_count)
+      if( $("#like_flag").val() == 0 ){
+        //like(flag==0)の場合,ハートを赤に変える
+        icon = icon_svg.find("path")
+        icon.attr("fill", "red")
+        //カウントを1つ増やす
+        var likes_count = Number($("#likes_count").text())+1
+        $("#likes_count").text(likes_count);
+        //flagの処理
+        $("#like_id").val(data.id);
+        $("#like_flag").val(1)
+      } else {
+        //unlike(flag==1)の場合,ハートをグレーに変える
+        icon = icon_svg.find("path")
+        icon.attr("fill", "#D7D7D7")
+        //カウントを1つ減らす
+        var likes_count = Number($("#likes_count").text())-1
+        $("#likes_count").text(likes_count)
+                //flagの処理
+        $("#like_flag").val(0)
+      }
     })
 
     //通信失敗した場合エラーメッセージを出す
-    .fail(function(){
-      alert('error');
-    })
-  });
-
-  //unlikeボタンを押した場合,ほぼlikeと同様
-  $("#unlike_button").on("click", function(e){
-    e.preventDefault();
-    event.stopPropagation();
-    var prototype_id = $('.prototype_id').val();
-    var url = $(this).attr("href")
-    var icon_svg = $(this)
-    var user_id = $('.current_user_id').val();
-    var csrf_token = $('meta[name=csrf-token]').attr('content');
-    $.ajax({
-      url: url,
-      type: "DELETE",
-      headers: {"X-CSRF-Token": csrf_token},
-      dataType: 'json',
-      processData: false,
-      contentType: false
-    })
-
-    .done(function(data){
-      icon = icon_svg.find("path")
-      icon.attr("fill", "#D7D7D7")
-      console.log($("#likes_count").text());
-      var likes_count = Number($("#likes_count").text())-1
-      $("#likes_count").text(likes_count)
-    })
     .fail(function(){
       alert('error');
     })
