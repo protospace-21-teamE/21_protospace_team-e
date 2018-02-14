@@ -7,6 +7,10 @@ $(function(){
     file = e.target.files[0];
 
     //画像以外のファイルの場合、処理を抜ける
+    if(!file.type.match('image.*')) {
+      alert("画像を選択してください");
+      return;
+    }
 
     //フォームの隣(前)にあるimagタグを取得
     img = $(this).prev()
