@@ -2,9 +2,13 @@ class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:show, :edit, :update, :destroy]
 
   def index
-    prototype_ids = Like.group(:prototype_id).order('count_prototype_id DESC').count(:prototype_id).keys
-    @popular_prototypes = prototype_ids.map { |id| Prototype.find(id) }
-    @prototypes = Prototype.page(params[:page]).per(4)
+    if params[:sort] == "0"
+      prototype_ids = Like.group(:prototype_id).order('count_prototype_id DESC').count(:prototype_id).keys
+      @liked_prototypes = prototype_ids.map { |id| Prototype.find(id) }
+      @prototypes = Kaminari.paginate_array(@liked_prototypes).page(params[:page]).per(4)
+    else
+      @prototypes = Prototype.order('created_at DESC').page(params[:page]).per(4)
+    end
   end
 
   def new
