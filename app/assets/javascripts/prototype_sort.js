@@ -1,0 +1,5 @@
+$(function(){
+  $().on("click", function(){
+    
+  })
+});

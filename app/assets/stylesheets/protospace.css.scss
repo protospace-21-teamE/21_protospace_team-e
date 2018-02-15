@@ -556,6 +556,26 @@ body {
     max-width: 300px;
     margin: auto;
   }
+  .user-nav {
+    padding: 50px 0;
+
+    .media-object {
+      border-radius: 50%;
+    }
+
+    button {
+      padding-right: 35px;
+
+      img {
+        max-width: 18px;
+        margin-right: 5px;
+      }
+
+      .num {
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 .form-signin {
