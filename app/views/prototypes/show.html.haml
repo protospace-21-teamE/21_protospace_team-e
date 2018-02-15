@@ -40,10 +40,10 @@
                   %input{name: "like_flag", type: "hidden", value: "0", class: "like_flag", id:"like_flag"}
                   %input{name: "like_id", type: "hidden", value: 0, class: "like_id", id:"like_id"}
 
-            %span#likes_count
-              = @prototype.likes.length
-            %input{name: "current_user_name", type: "hidden", value: current_user.id, class: 'current_user_id' }
-            %input{name: "prototype_id", type: "hidden", value: @prototype.id, class: 'prototype_id' }
+              %span#likes_count
+                = @prototype.likes.length
+              %input{name: "current_user_name", type: "hidden", value: current_user.id, class: 'current_user_id' }
+              %input{name: "prototype_id", type: "hidden", value: @prototype.id, class: 'prototype_id' }
 
   .row
     .col-md-9.image-box
