@@ -8,7 +8,7 @@
             .user-name.col-md-10
               = f.text_field :name, placeholder: "Input Username", autofocus: true, required: true
             .user-image.col-md-2
-              %img{ style: "" }
+              = image_tag(@user.avatar.thumb, alt: "profile_photo", class: "media-object", style: "width: 64px; height: 64px;")
               = f.file_field :avatar
           .user-email
             = f.text_field :email, placeholder: "Input Email", required: true
