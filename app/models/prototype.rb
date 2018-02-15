@@ -4,7 +4,8 @@ class Prototype < ActiveRecord::Base
   has_many :comments
   has_many :users, through: :likes
   has_many :likes
-  has_many :tags
+  has_many :tags, through: :tag_prototypes
+  has_many :tag_prototypes
 
   accepts_nested_attributes_for :captured_images, reject_if: :reject_sub_images
 
