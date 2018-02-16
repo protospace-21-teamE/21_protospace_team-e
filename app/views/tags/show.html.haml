@@ -1,0 +1,22 @@
+.jumbotron
+  .container.text-center
+    = image_tag("header_logo.png", alt: "PROTO TYPE - SHARE THE PROTOTYPE", height: "73px")
+
+.filter-nav
+  .container
+    .row
+      = link_to "TAGGED WITH:#{@tag.name}" , "javascript:void(0)", class: "btn btn-default tag-name"
+      %ul.nav.nav-pills.col-lg-11
+        %li.btn-default.btn-popular
+          = link_to "Popular", prototypes_path(sort: "0"), class:"sort_button", remote: true
+        %li.btn-default.btn-popular
+          = link_to "Newest", prototypes_path(sort: "1"), class:"sort_button", remote: true
+      = link_to "VIEW TAGS", tags_path, class: "btn btn-default col-lg-1"
+
+.container.proto-list
+  .row
+    .prototypes-list
+      = render partial: 'prototypes/prototype', collection: @prototypes
+
+.text-center
+  = paginate(@prototypes)
