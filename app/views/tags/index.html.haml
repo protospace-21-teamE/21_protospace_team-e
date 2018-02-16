@@ -1,0 +1,18 @@
+.jumbotron
+  .container.text-center
+    = image_tag("header_logo.png", alt: "PROTO TYPE - SHARE THE PROTOTYPE", height: "73px")
+
+.filter-nav
+  .container
+    .row
+      = link_to "VIEW TAGS", tags_path, class: "btn btn-default col-lg-1"
+
+.container.proto-list
+  .row
+    .tag-list
+      - @tags.each do |tag|
+        = link_to tag.name, "", class: "btn btn-default tag-button"
+
+
+.text-center
+  / = paginate(@prototypes)
