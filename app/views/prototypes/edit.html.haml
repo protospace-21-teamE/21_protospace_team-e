@@ -31,6 +31,20 @@
                       = image_tag ""
                       = image.file_field :content
                       = image.hidden_field :status, value: "sub"
+        .col-md-12
+          %h4 Tags
+          - 3.times do |i|
+            - if @tags[i].present?
+              = text_field_tag "tags[#{i}][name]", @tags[i].name
+            - else
+              = text_field_tag "tags[#{i}][name]", "", placeholder: "Input Tag"
+            / - if @tags[i].present?
+            /   = f.fields_for :tags, @tags[i] do |tag|
+            /     = tag.text_field :name, require: true, placeholder: "Input Tag"
+            / - else
+            /   = f.fields_for :tags do |tag|
+            /     = tag.text_field :name, value:"", placeholder: "Input Tag"
+
       .row.proto-description
         .col-md-12
           %h4 Catch Copy
