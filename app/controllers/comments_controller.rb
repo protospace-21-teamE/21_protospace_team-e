@@ -29,7 +29,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy if @comment.user_id == current_user.id
     flash[:notice] = "Delete your comment completed"
-    redirect_to prototype_path(params[:prototype_id])
+    respond_to do |format|
+      format.html {redirect_to prototype_path(params[:prototype_id])}
+      format.json
+    end
   end
 
   private
