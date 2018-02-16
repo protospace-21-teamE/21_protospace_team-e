@@ -14,16 +14,16 @@ class PrototypesController < ApplicationController
   def new
     @prototype = Prototype.new
     @prototype.captured_images.build
-    @prototype.tags.build
   end
 
   def create
     @prototype = Prototype.new(prototype_params)
+    @prototype.tags << Tag.where(name: params[:tag][:name]).first_or_initialize
     if @prototype.save
       redirect_to :root, notice: 'New prototype was successfully created'
     else
       redirect_to ({ action: :new }), alert: 'New prototype was unsuccessfully created'
-     end
+    end
   end
 
   def show
@@ -62,8 +62,8 @@ class PrototypesController < ApplicationController
       :catch_copy,
       :concept,
       :user_id,
-      captured_images_attributes: [:id, :content, :status],
-      tags_attributes: [:name]
+      captured_images_attributes: [:id, :content, :status]
     )
   end
+
 end
