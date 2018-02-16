@@ -37,9 +37,30 @@ class PrototypesController < ApplicationController
     @main = @prototype.captured_images[0]
     @sub = @prototype.captured_images.where(status: 1)
     @add = @prototype.captured_images.build
+    @tags = @prototype.tags
   end
 
   def update
+    # before_tag_list = []
+    new_tag_list = []
+    # after_tag_list = []
+
+    # @prototype.tags.each do |tag|
+    #   before_tag_list << tag.name
+    # end
+
+    params[:tags].each do |num, tag|
+      new_tag_list << tag[:name]
+    end
+    # after_tag_list = (before_tag_list + new_tag_list).uniq
+
+    @prototype.tags = []
+    new_tag_list.each do |tag_name|
+      @prototype.tags << Tag.where(name: tag_name).first_or_initialize unless tag_name ==""
+    end
+    # Tag.where(name: tag[:name]).first_or_initialize if tag[:name].present?
+    # @prototype.tags.uniq
+
     @prototype.update(prototype_params)
     flash[:notice] = 'Edited prototype was successfully saved'
     redirect_to action: :show
