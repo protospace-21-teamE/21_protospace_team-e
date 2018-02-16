@@ -5,6 +5,7 @@
 .filter-nav
   .container
     .row
+      = link_to "PROTOTYPES" , "javascript:void(0)", class: "btn btn-default tag-name"
       %ul.nav.nav-pills.col-lg-11
         %li.btn-default.btn-popular
           = link_to "Popular", prototypes_path(sort: "0"), class:"sort_button", remote: true
