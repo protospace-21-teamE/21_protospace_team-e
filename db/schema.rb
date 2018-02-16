@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207013407) do
+ActiveRecord::Schema.define(version: 20180215003228) do
 
   create_table "captured_images", force: :cascade do |t|
     t.string  "content",      limit: 255
@@ -53,6 +53,22 @@ ActiveRecord::Schema.define(version: 20180207013407) do
 
   add_index "prototypes", ["user_id"], name: "index_prototypes_on_user_id", using: :btree
 
+  create_table "tag_prototypes", force: :cascade do |t|
+    t.integer  "tag_id",       limit: 4
+    t.integer  "prototype_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "tag_prototypes", ["prototype_id"], name: "fk_rails_c718c14336", using: :btree
+  add_index "tag_prototypes", ["tag_id"], name: "fk_rails_45ad681ee7", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
     t.string   "encrypted_password",     limit: 255,   default: "", null: false
@@ -82,4 +98,6 @@ ActiveRecord::Schema.define(version: 20180207013407) do
   add_foreign_key "likes", "prototypes"
   add_foreign_key "likes", "users"
   add_foreign_key "prototypes", "users"
+  add_foreign_key "tag_prototypes", "prototypes"
+  add_foreign_key "tag_prototypes", "tags"
 end

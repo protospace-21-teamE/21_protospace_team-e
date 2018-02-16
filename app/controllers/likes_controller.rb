@@ -2,8 +2,6 @@ class LikesController < ApplicationController
 
   def create
     @like = Like.create(like_params)
-    # flash[:notice] = 'Liked this prototype'
-    # binding.pry
     respond_to do |format|
       format.html {redirect_to prototype_path(id: params[:prototype_id])}
       format.json
@@ -13,7 +11,6 @@ class LikesController < ApplicationController
   def destroy
     @like = Like.find(params[:id])
     @like.destroy
-    flash[:notice] = 'Unliked this prototype'
     respond_to do |format|
       format.html {redirect_to prototype_path(id: params[:prototype_id])}
       format.json

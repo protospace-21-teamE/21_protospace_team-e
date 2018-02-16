@@ -1,5 +1,0 @@
-$(function(){
-  $().on("click", function(){
-    
-  })
-});

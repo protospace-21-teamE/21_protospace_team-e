@@ -27,6 +27,9 @@
                     = image.hidden_field :status, value: "sub"
       .row.proto-description
         .col-md-12
+          %h4 Tag
+          = text_field :tag, :name, require: true, placeholder: "Input Tag"
+        .col-md-12
           %h4 Catch Copy
           = f.text_field :catch_copy, require: true, placeholder: "Input Catch Copy"
         .col-md-12
