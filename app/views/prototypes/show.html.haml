@@ -75,10 +75,11 @@
         .comment
           %strong
             = comment.user.name + " : "
-          = comment.comment
+          %span.comment-body
+            = comment.comment
           -if user_signed_in? && current_user.id == comment.user_id
-            = link_to "Edit", edit_prototype_comment_path(@prototype, comment), method: :get, class: "edit_comment"
-            = link_to "Delete", prototype_comment_path(@prototype, comment), method: :delete, "data-comment_id": comment.id, class: "delete_comment", id: comment.id
+            = link_to "Edit", edit_prototype_comment_path(@prototype, comment), class: "edit-comment", "data-comment-id": comment.id, "data-user": comment.user.name
+            = link_to "Delete", prototype_comment_path(@prototype, comment), "data-comment-id": comment.id, class: "delete-comment", id: comment.id
 
   .comment-form
     -if current_user
