@@ -18,9 +18,10 @@ class CommentsController < ApplicationController
   end
 
   def update
-
+    # binding.pry
     @comment = Comment.find(params[:id])
-    @comment.update(comment_params)
+    # @comment.update(comment_params)
+    @comment.update(update_params)
     respond_to do |format|
       format.html {redirect_to prototype_path(params[:prototype_id])}
       format.json
@@ -44,5 +45,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.permit(:comment, :prototype_id)
+  end
+
+  def update_params
+    params.require(:comment).permit(:comment).merge(prototype_id: params[:prototype_id])
   end
 end
